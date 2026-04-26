@@ -1,4 +1,5 @@
-import java.util.Scanner;
+
+ import java.util.Scanner;
 import java.util.ArrayList;
 class Aluno{
     String nome;
@@ -10,7 +11,7 @@ class Aluno{
         this.nota=n2;
         }
         public void mostrar(){
-            System.out.print("nome: "+nome+"turma: "+ turma);
+            System.out.println("nome: "+nome+" turma: "+ turma);
             //mostrar utilizado no metodo de busca
         }
     public String getNome(){
@@ -23,6 +24,11 @@ class Aluno{
         return nota;
     }
     //retorna as coisas ai 
+    public void set(String n,String t , int n2){
+        this.nome = n;
+        this.turma=t;
+        this.nota = n2;
+    }
 }
 public class Main{
     static ArrayList<Aluno> lista = new ArrayList<>();
@@ -36,21 +42,20 @@ public class Main{
             System.out.println("2 mostrar");
             System.out.println("3 remover");
             System.out.println("4 buscar");
+            System.out.println("5 atualizar");
             opcao = sc.nextInt();
             //agr q percebi eu posso usar tipo um nunero aleatorio ex 9 e nak vai dar erro
-           if(opcao==1){
-               cadastrar();
-               }
-            if(opcao==2){
-                mostrar();
-           }
-           if(opcao==3){
-               remover();
-           }
-           if(opcao==4){
-               buscar();
-    //por algum motivo o switch nao funcionou corretamente tive q apelar
-           }
+            switch(opcao){
+                case 1 : cadastrar();
+                break;
+                case 2 : mostrar();
+                break;
+                case 3 : remover();
+                break;
+                case 4 : buscar();
+                break;
+                case 5 : atualizar();
+            }
 	    }
 	 }
     public static void cadastrar(){
@@ -95,14 +100,32 @@ public class Main{
     }
     public static void buscar(){
         Scanner sc = new Scanner(System.in);
+        System.out.println("quem voçê deseja buscar");
         String bb = sc.nextLine();
         for(Aluno a : lista){
             if(a.getNome().toLowerCase().contains(bb.toLowerCase())){
                 a.mostrar();
                 //essa parte e meio confunsa mais nao tem muito oq fazer esses dois metodos ficaram lindos
             }
+            
         }
     }
+    public static void atualizar(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("quem voce deseja atualizar");
+        String bb = sc.nextLine();
+        for(Aluno a : lista){
+        if(a.getNome().toLowerCase().contains(bb.toLowerCase())){
+            System.out.println("digite novo nome");
+            String nome = sc.nextLine();
+            System.out.println("nova turma");
+            String turma = sc.nextLine();
+            System.out.println("nova nota");
+            int  nota = sc.nextInt();
+            a.set(nome,turma,nota);
+        }
+    }
+}
     public static void main(String[] args){
 		Menu();
 		//aura
